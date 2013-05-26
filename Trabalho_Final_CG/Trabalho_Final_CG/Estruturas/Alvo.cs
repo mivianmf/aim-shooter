@@ -23,10 +23,10 @@ namespace Trabalho_Final_CG.Estruturas
 
             this.circulos = new Circulo[quantidade_circulos];
 
-            this.circulos[0] = new Circulo(this.centro, 100, caneta, System.Drawing.Color.Azure);
-            this.circulos[1] = new Circulo(this.centro, 60, caneta, System.Drawing.Color.Azure);
-            this.circulos[2] = new Circulo(this.centro, 30, caneta, System.Drawing.Color.Azure);
-            this.circulos[3] = new Circulo(this.centro, 10, caneta, System.Drawing.Color.Azure);
+            this.circulos[0] = new Circulo(this.centro, 100, caneta);
+            this.circulos[1] = new Circulo(this.centro, 60, caneta);
+            this.circulos[2] = new Circulo(this.centro, 30, caneta);
+            this.circulos[3] = new Circulo(this.centro, 10, caneta);
             
         }
 
