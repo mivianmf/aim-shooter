@@ -15,12 +15,12 @@ namespace Trabalho_Final_CG.Estruturas
         private Color cor;
         private Pen caneta;
 
-        public Circulo(System.Drawing.Point centro, int raio, Pen caneta, Color cor)
+        public Circulo(System.Drawing.Point centro, int raio, Pen caneta)
         {
             this.centro = centro;
             this.raio = raio;
             this.caneta = caneta;
-            this.cor = cor;
+            this.cor = caneta.Color;
         }
 
         public void plotarCirculo(Graphics g, int x, int y)
