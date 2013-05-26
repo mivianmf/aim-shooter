@@ -23,7 +23,7 @@ namespace Trabalho_Final_CG.Estruturas
             this.cor = caneta.Color;
         }
 
-        public void plotarCirculo(Graphics g, int x, int y)
+        private void plotarCirculo(Graphics g, int x, int y)
         {
             Aplicacao.desenhar(g, caneta, centro.X + x, centro.Y + y);
             Aplicacao.desenhar(g, caneta, centro.X - x, centro.Y + y);
