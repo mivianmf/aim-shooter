@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Name = "Aplicacao";
-            this.Text = "Hit the Bubble";
+            this.Text = "Keep Steady";
             this.ResumeLayout(false);
 
         }

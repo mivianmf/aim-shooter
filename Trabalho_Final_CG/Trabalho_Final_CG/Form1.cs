@@ -21,8 +21,6 @@ namespace Trabalho_Final_CG
 
         public Aplicacao()
         {
-            int x_aleat, y_aleat;
-
             InitializeComponent();
 
             //BACKGROUND COLOR
