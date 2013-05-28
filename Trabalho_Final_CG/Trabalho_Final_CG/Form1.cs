@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace Trabalho_Final_CG
 {
@@ -14,11 +15,9 @@ namespace Trabalho_Final_CG
     public partial class Aplicacao : Form
     {
         private Pen caneta;
-        //private Circulo[] circulos;
         private Alvo alvo;
         private BackgroundWorker bg_thread;
-        private int quantidade_circulos;
-
+        
         public Aplicacao()
         {
             InitializeComponent();
@@ -36,7 +35,7 @@ namespace Trabalho_Final_CG
             this.caneta = new Pen(System.Drawing.Color.Black, 4);
             
             this.alvo = new Alvo();
-                       
+
             this.SetStyle(
                 System.Windows.Forms.ControlStyles.UserPaint |
                 System.Windows.Forms.ControlStyles.AllPaintingInWmPaint |
