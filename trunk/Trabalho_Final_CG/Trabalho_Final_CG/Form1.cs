@@ -14,7 +14,7 @@ namespace Trabalho_Final_CG
     using Trabalho_Final_CG.Estruturas;
     public partial class Aplicacao : Form
     {
-        private Pen caneta;
+        private Brush pincel;
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         
@@ -32,7 +32,7 @@ namespace Trabalho_Final_CG
             bg_thread.WorkerReportsProgress = true;
 
             //ATRIBUTOS
-            this.caneta = new Pen(System.Drawing.Color.Black, 4);
+            this.pincel = new SolidBrush(System.Drawing.Color.Black);
             
             this.alvo = new Alvo();
 
@@ -54,9 +54,9 @@ namespace Trabalho_Final_CG
             this.alvo.draw(e.Graphics);
         }//end OnPaint
 
-        public static void desenhar(Graphics g, Pen caneta, int x, int y)
+        public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
-            g.DrawLine(caneta, new Point(x,y), new Point(x + 1, y + 1));
+            g.FillEllipse(pincel, x, y, 2, 2);
         }//end desenhar
 
         private void Aplicacao_MouseMove(object sender, MouseEventArgs args)

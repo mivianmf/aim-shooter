@@ -13,29 +13,29 @@ namespace Trabalho_Final_CG.Estruturas
         private Point centro;
         private int raio;
         private Color cor;
-        private Pen caneta;
+        private Brush pincel;
 
-        public Circulo(System.Drawing.Point centro, int raio, Pen caneta, Color corInterna)
+        public Circulo(System.Drawing.Point centro, int raio, Brush pincel, Color corInterna)
         {
             this.centro = centro;
             this.raio = raio;
-            this.caneta = caneta;
+            this.pincel = pincel;
             this.cor = corInterna;
         }
 
         private void plotarCirculo(Graphics g, int x, int y)
         {
-            Aplicacao.desenhar(g, caneta, centro.X + x, centro.Y + y);
-            Aplicacao.desenhar(g, caneta, centro.X - x, centro.Y + y);
+            g.FillEllipse(this.pincel, this.centro.X + x - 1, this.centro.Y + y - 1, 2, 2);
+            g.FillEllipse(this.pincel, this.centro.X - x - 1, this.centro.Y + y - 1, 2, 2);
 
-            Aplicacao.desenhar(g, caneta, centro.X + x, centro.Y - y);
-            Aplicacao.desenhar(g, caneta, centro.X - x, centro.Y - y);
+            g.FillEllipse(this.pincel, this.centro.X + x - 1, this.centro.Y - y - 1, 2, 2);
+            g.FillEllipse(this.pincel, this.centro.X - x - 1, this.centro.Y - y - 1, 2, 2);
 
-            Aplicacao.desenhar(g, caneta, centro.X + y, centro.Y + x);
-            Aplicacao.desenhar(g, caneta, centro.X - y, centro.Y + x);
+            g.FillEllipse(this.pincel, this.centro.X + y - 1, this.centro.Y + x - 1, 2, 2);
+            g.FillEllipse(this.pincel, this.centro.X - y - 1, this.centro.Y + x - 1, 2, 2);
 
-            Aplicacao.desenhar(g, caneta, centro.X + y, centro.Y - x);
-            Aplicacao.desenhar(g, caneta, centro.X - y, centro.Y - x);
+            g.FillEllipse(this.pincel, this.centro.X + y - 1, this.centro.Y - x - 1, 2, 2);
+            g.FillEllipse(this.pincel, this.centro.X - y - 1, this.centro.Y - x - 1, 2, 2);
         }//end plotarCirculo
 
         public void draw(Graphics g)
@@ -97,14 +97,14 @@ namespace Trabalho_Final_CG.Estruturas
             return this.cor;
         }
 
-        public void setCaneta(Pen caneta)
+        public void setPincel(Brush pincel)
         {
-            this.caneta = caneta;
+            this.pincel = pincel;
         }
 
-        public Pen getCaneta()
+        public Brush getPincel()
         {
-            return this.caneta;
+            return this.pincel;
         }
         
     }//end class
