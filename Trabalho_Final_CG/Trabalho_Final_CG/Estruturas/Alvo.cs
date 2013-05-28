@@ -10,7 +10,7 @@ namespace Trabalho_Final_CG.Estruturas
     class Alvo
     {
         private Circulo[] circulos;
-        private Pen caneta;
+        private Brush pincel;
         private const int quantidade_circulos = 4;
         private Point centro = new Point(200, 200);
 
@@ -19,16 +19,16 @@ namespace Trabalho_Final_CG.Estruturas
 
             Random aleatorio = new Random();
 
-            this.caneta = new Pen(System.Drawing.Color.Black, 4);
+            this.pincel = new SolidBrush(System.Drawing.Color.Black);
 
             //Define os círculos do alvo
             this.circulos = new Circulo[quantidade_circulos];
             
             //Define cores internas, tamanho, etc.
-            this.circulos[0] = new Circulo(this.centro, 100, caneta, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, caneta, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, caneta, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, caneta, Color.Yellow);
+            this.circulos[0] = new Circulo(this.centro, 100, pincel, Color.Black);
+            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
+            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
+            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
             
         }//end constructor
 
@@ -45,7 +45,7 @@ namespace Trabalho_Final_CG.Estruturas
             }//end for
             
             
-        }
+        }//end draw
 
         private void colorirAlvo(Graphics g, int id_circulo)
         {
