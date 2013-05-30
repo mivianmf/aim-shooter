@@ -51,12 +51,33 @@ namespace Trabalho_Final_CG
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            this.alvo.draw(e.Graphics);
+            int cont = 0;
+             while(cont < 5){
+                this.alvo.drawDireita(e.Graphics);
+                this.Refresh();
+                cont++;
+             }
+
+             cont = 0;
+             while (cont < 5)
+             {
+                 this.alvo.drawBaixo(e.Graphics);
+                 this.Refresh();
+                 this.
+                 cont++;
+             }
+
+
+             Console.WriteLine("SAIU");
+             Environment.Exit(0);
+ 
         }//end OnPaint
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
+            
             g.FillEllipse(pincel, x, y, 2, 2);
+
         }//end desenhar
 
         private void Aplicacao_MouseMove(object sender, MouseEventArgs args)
