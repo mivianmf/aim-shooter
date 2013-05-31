@@ -17,10 +17,13 @@ namespace Trabalho_Final_CG
         private Brush pincel;
         private Alvo alvo;
         private BackgroundWorker bg_thread;
+        private int cont = 0;
         
         public Aplicacao()
         {
             InitializeComponent();
+            
+            
 
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
@@ -43,6 +46,7 @@ namespace Trabalho_Final_CG
                 true);
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             this.UpdateStyles();
+            this.WindowState = FormWindowState.Maximized;
 
             //EVENTOS
             this.MouseMove += Aplicacao_MouseMove;
@@ -51,27 +55,60 @@ namespace Trabalho_Final_CG
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            int cont = 0;
-             while(cont < 5){
+      
+            this.Refresh();
+            if (this.cont < 250){
+                this.alvo.drawCima(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont>= 250 && cont< 800 ){
                 this.alvo.drawDireita(e.Graphics);
-                this.Refresh();
-                cont++;
-             }
+                this.cont++;
+            }
+            if (this.cont >= 800 && cont < 1050)
+            {
+                this.alvo.drawBaixo(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont >= 1050 && cont < 1600)
+            {
+                this.alvo.drawEsquerda(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont >= 1600 && cont < 1900)
+            {
+                this.alvo.drawCimaDireita(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont >= 1900 && cont < 2100)
+            {
+                this.alvo.drawCimaEsquerda(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont >= 2100 && cont < 2300)
+            {
+                this.alvo.drawBaixoEsquerda(e.Graphics);
+                this.cont++;
+            }
+            if (this.cont >= 2300 && cont < 2600)
+            {
+                this.alvo.drawBaixoDireita(e.Graphics);
+                this.cont++;
+            }
 
-             cont = 0;
-             while (cont < 5)
-             {
-                 this.alvo.drawBaixo(e.Graphics);
-                 this.Refresh();
-                 this.
-                 cont++;
-             }
+
 
 
              Console.WriteLine("SAIU");
-             Environment.Exit(0);
+        
  
         }//end OnPaint
+
+
+        public static void  mover(){
+
+            
+        }
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
