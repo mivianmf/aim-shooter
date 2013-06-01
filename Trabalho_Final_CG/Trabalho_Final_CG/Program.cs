@@ -17,12 +17,8 @@ namespace Trabalho_Final_CG
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            PopUpVelocidade popUpVelocidade = new PopUpVelocidade();
             Aplicacao aplicacao = new Aplicacao();
 
-            popUpVelocidade.adicionarObservador(aplicacao);
-
-            Application.Run(popUpVelocidade);
             Application.Run(aplicacao);
         }
     }
