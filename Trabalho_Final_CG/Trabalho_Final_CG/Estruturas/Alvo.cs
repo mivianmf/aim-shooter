@@ -29,8 +29,9 @@ namespace Trabalho_Final_CG.Estruturas
             
         }//end constructor
 
-        public void drawDireita(Graphics g)
+        public void draw(Graphics g)
         {
+
             //Desenha os círculos
             this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
             this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
@@ -43,142 +44,7 @@ namespace Trabalho_Final_CG.Estruturas
                     //Colore o alvo de acordo com a cor do círculo
                     colorirAlvo(g, i);
                 }//end for
-
-                this.translacaoDireita();
                // Thread.Sleep(1);
-        }//end draw
-
-        public void drawBaixo(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoBaixo();
-          // Thread.Sleep(1);
-        }//end draw
-
-        public void drawCima(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoCima();
-           // Thread.Sleep(1);
-        }//end draw
-
-        public void drawEsquerda(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoEsquerda();
-           // Thread.Sleep(1);
-        }//end draw
-
-        public void drawCimaEsquerda(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoCimaEsquerda();
-           // Thread.Sleep(1);
-        }//end draw
-
-        public void drawCimaDireita(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoCimaDireita();
-           // Thread.Sleep(1);
-        }//end draw
-
-
-        public void drawBaixoEsquerda(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoBaixoEsquerda();
-           // Thread.Sleep(1);
-        }//end draw
-
-        public void drawBaixoDireita(Graphics g)
-        {
-            //Desenha os círculos
-            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
-            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
-            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-            for (int i = 0; i < quantidade_circulos; i++)
-            {
-                //Desenha o círculo
-                this.circulos[i].draw(g);
-                //Colore o alvo de acordo com a cor do círculo
-                colorirAlvo(g, i);
-            }//end for
-
-            this.translacaoBaixoDireita();
-           // Thread.Sleep(1);
         }//end draw
 
 
@@ -196,50 +62,50 @@ namespace Trabalho_Final_CG.Estruturas
                 raioAtual * 2, raioAtual * 2);
         }//end draw
 
-        public  void translacaoDireita()
-        {
-            //movimento para direita
-            this.centro.X += 1;
+
+
+        public void translacao(String direcao, int velocidade)
+        { 
+            switch(direcao)
+            {
+                case "direita":
+                    this.centro.X += velocidade;
+                    break;
+                case "esquerda":
+                    this.centro.X -= velocidade;
+                    break;
+
+                case "cima":
+                    this.centro.Y -= velocidade;
+                    break;
+            
+                case "baixo":
+                    this.centro.Y += velocidade;
+                    break;
+                
+                case "cimaEsquerda":
+                    this.centro.X -= velocidade;
+                    this.centro.Y -= velocidade;
+                    break;
+
+                case "cimaDireita":
+                    this.centro.X += velocidade;
+                    this.centro.Y -= velocidade;            
+                    break;
+
+                case "baixoEsquerda":
+                    this.centro.X -= velocidade;
+                    this.centro.Y += velocidade;
+                    break;
+
+                case "baixoDireita":
+                    this.centro.X += velocidade;
+                    this.centro.Y += velocidade;
+                    break;
+
+            }
         }
 
-        public void translacaoEsquerda(){
-            //movimento para esquerda
-            this.centro.X -= 1;
-        }
-
-        public void translacaoBaixo(){
-            //movimento para cima 
-            this.centro.Y += 1;
-        }
-
-        public void translacaoCima(){
-            //movimento para baixo
-            this.centro.Y -= 1;
-        }
-
-        public void translacaoBaixoDireita(){
-            //movimento para cima e para direita
-            this.centro.X += 1;
-            this.centro.Y += 1;
-        }
-
-        public void translacaoCimaDireita(){
-            //movimento para baixo e para direita
-            this.centro.X += 1;
-            this.centro.Y -= 1;
-        }
-
-        public void translacaoBaixoEsquerda(){
-            //movimento para cima e para esquerda
-            this.centro.X -= 1;
-            this.centro.Y += 1;
-        }
-
-        public void translacaoCimaEsquerda(){
-            //movimento para baixo e para esquerda
-            this.centro.X -= 1;
-            this.centro.Y -= 1;
-        }
     }//end class Alvo
 
 }//end namespace
