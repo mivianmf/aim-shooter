@@ -111,7 +111,7 @@ namespace Trabalho_Final_CG.Estruturas
         {
             for (int i = this.circulos.Length - 1; i >= 0; i--)
             {
-                if (this.circulos[i].estaDentro(ponto))
+                if (this.circulos[i].estaDentro(ponto) < 0)
                 {
                     return 100/this.circulos[i].getRaio();
                 }//end if

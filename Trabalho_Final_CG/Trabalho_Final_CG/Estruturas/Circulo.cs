@@ -70,9 +70,9 @@ namespace Trabalho_Final_CG.Estruturas
 
         }//end draw
 
-        public bool estaDentro(Point ponto)
+        public double estaDentro(Point ponto)
         {
-            return Math.Sqrt(Math.Pow(ponto.X - this.centro.X, 2) + Math.Pow(ponto.Y - this.centro.Y, 2)) < this.raio;
+            return ( (Math.Pow(ponto.X - this.centro.X, 2) + Math.Pow(ponto.Y - this.centro.Y, 2)) - (Math.Pow(this.raio,2)));
         }
 
         //GETTERS AND SETTERS
