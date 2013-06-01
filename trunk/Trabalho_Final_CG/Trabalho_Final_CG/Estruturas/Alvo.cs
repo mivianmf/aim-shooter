@@ -23,9 +23,10 @@ namespace Trabalho_Final_CG.Estruturas
 
             //Define os círculos do alvo
             this.circulos = new Circulo[quantidade_circulos];
-            
-            //Define cores internas, tamanho, etc.
-            
+            this.circulos[0] = new Circulo(this.centro, 95, pincel, Color.Black);
+            this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
+            this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
+            this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
             
         }//end constructor
 
@@ -37,14 +38,14 @@ namespace Trabalho_Final_CG.Estruturas
             this.circulos[1] = new Circulo(this.centro, 60, pincel, Color.Blue);
             this.circulos[2] = new Circulo(this.centro, 30, pincel, Color.Red);
             this.circulos[3] = new Circulo(this.centro, 10, pincel, Color.Yellow);
-                for (int i = 0; i < quantidade_circulos; i++)
-                {
-                    //Desenha o círculo
-                    this.circulos[i].draw(g);
-                    //Colore o alvo de acordo com a cor do círculo
-                    colorirAlvo(g, i);
-                }//end for
-               // Thread.Sleep(1);
+            for (int i = 0; i < quantidade_circulos; i++)
+            {
+                //Desenha o círculo
+                this.circulos[i].draw(g);
+                //Colore o alvo de acordo com a cor do círculo
+                colorirAlvo(g, i);
+            }//end for
+            // Thread.Sleep(1);
         }//end draw
 
 
@@ -65,8 +66,8 @@ namespace Trabalho_Final_CG.Estruturas
 
 
         public void translacao(String direcao, int velocidade)
-        { 
-            switch(direcao)
+        {
+            switch (direcao)
             {
                 case "direita":
                     this.centro.X += velocidade;
@@ -78,11 +79,11 @@ namespace Trabalho_Final_CG.Estruturas
                 case "cima":
                     this.centro.Y -= velocidade;
                     break;
-            
+
                 case "baixo":
                     this.centro.Y += velocidade;
                     break;
-                
+
                 case "cimaEsquerda":
                     this.centro.X -= velocidade;
                     this.centro.Y -= velocidade;
@@ -90,7 +91,7 @@ namespace Trabalho_Final_CG.Estruturas
 
                 case "cimaDireita":
                     this.centro.X += velocidade;
-                    this.centro.Y -= velocidade;            
+                    this.centro.Y -= velocidade;
                     break;
 
                 case "baixoEsquerda":
@@ -104,7 +105,19 @@ namespace Trabalho_Final_CG.Estruturas
                     break;
 
             }
-        }
+        }//end translação
+
+        public int estaDentro(Point ponto)
+        {
+            for (int i = this.circulos.Length - 1; i >= 0; i--)
+            {
+                if (this.circulos[i].estaDentro(ponto))
+                {
+                    return 100/this.circulos[i].getRaio();
+                }//end if
+            }//end for
+            return 0;
+        }//end estaDentro
 
     }//end class Alvo
 

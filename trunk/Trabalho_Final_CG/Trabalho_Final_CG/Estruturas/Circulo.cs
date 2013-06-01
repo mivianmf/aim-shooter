@@ -14,6 +14,7 @@ namespace Trabalho_Final_CG.Estruturas
         private int raio;
         private Color cor;
         private Brush pincel;
+        private Rectangle retanguloCircunscritor;
 
         public Circulo(System.Drawing.Point centro, int raio, Brush pincel, Color corInterna)
         {
@@ -21,6 +22,7 @@ namespace Trabalho_Final_CG.Estruturas
             this.raio = raio;
             this.pincel = pincel;
             this.cor = corInterna;
+            this.retanguloCircunscritor = new Rectangle(this.centro.X - raio, this.centro.Y - raio,  2 * raio, 2 * raio);
         }
 
         private void plotarCirculo(Graphics g, int x, int y)
@@ -36,6 +38,8 @@ namespace Trabalho_Final_CG.Estruturas
 
             g.FillEllipse(this.pincel, this.centro.X + y - 1, this.centro.Y - x - 1, 2, 2);
             g.FillEllipse(this.pincel, this.centro.X - y - 1, this.centro.Y - x - 1, 2, 2);
+
+            //g.DrawRectangle(new Pen(Color.Red), this.retanguloCircunscritor);
         }//end plotarCirculo
 
         public void draw(Graphics g)
@@ -65,6 +69,11 @@ namespace Trabalho_Final_CG.Estruturas
             }//end while
 
         }//end draw
+
+        public bool estaDentro(Point ponto)
+        {
+            return Math.Sqrt(Math.Pow(ponto.X - this.centro.X, 2) + Math.Pow(ponto.Y - this.centro.Y, 2)) < this.raio;
+        }
 
         //GETTERS AND SETTERS
         public void setCentro(Point centro)
