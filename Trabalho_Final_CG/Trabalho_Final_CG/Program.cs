@@ -16,7 +16,14 @@ namespace Trabalho_Final_CG
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Aplicacao());
+
+            PopUpVelocidade popUpVelocidade = new PopUpVelocidade();
+            Aplicacao aplicacao = new Aplicacao();
+
+            popUpVelocidade.adicionarObservador(aplicacao);
+
+            Application.Run(popUpVelocidade);
+            Application.Run(aplicacao);
         }
     }
 }
