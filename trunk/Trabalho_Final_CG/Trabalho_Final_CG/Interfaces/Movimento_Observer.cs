@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Trabalho_Final_CG.Interfaces
 {
-    public interface Velocidade_Observer
+    interface Movimento_Observer
     {
-        void atualizar(Velocidade_Subject sujeito);
+        void atualizar(Movimento_Subject sujeito);
     }
 }

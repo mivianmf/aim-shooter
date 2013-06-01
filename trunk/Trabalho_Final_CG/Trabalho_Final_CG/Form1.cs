@@ -13,10 +13,9 @@ using Trabalho_Final_CG.Interfaces;
 namespace Trabalho_Final_CG
 {
     using Trabalho_Final_CG.Estruturas;
-    public partial class Aplicacao : Form, Velocidade_Observer
+    public partial class Aplicacao : Form
     {
         private Brush pincel;
-        private PopUpVelocidade popUpVelocidade;
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         private int cont = 0;
@@ -29,10 +28,7 @@ namespace Trabalho_Final_CG
         public Aplicacao()
         {
             InitializeComponent();
-
-            //PopUp
-            this.popUpVelocidade = new PopUpVelocidade();
-
+            
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
 
@@ -49,8 +45,8 @@ namespace Trabalho_Final_CG
 
             this.velocidade = 1;
 
-            this.alvo = new Alvo();
-
+            this.alvo = new Alvo(new Point(350,600));
+            
             this.SetStyle(
                 System.Windows.Forms.ControlStyles.UserPaint |
                 System.Windows.Forms.ControlStyles.AllPaintingInWmPaint |
@@ -65,6 +61,14 @@ namespace Trabalho_Final_CG
             this.MouseClick += Aplicacao_MouseClick;
             bg_thread.ProgressChanged += new ProgressChangedEventHandler(funciona);
             bg_thread.DoWork += new DoWorkEventHandler(funcionaT);
+
+            //TODO: IMPORTANTE
+            Desenho quad = new Desenho(4);
+            Point[]vertices = {new Point(350,350),new Point(450,350), new Point(450,450), new Point(350,450)};
+            quad.setVertices(vertices);
+            Fase fase1 = new Fase(1, quad, 1);
+            fase1.adicionarObservador(this.alvo);
+            fase1.iniciar();
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -97,7 +101,7 @@ namespace Trabalho_Final_CG
             this.pontuacao += this.alvo.estaDentro(this.posicaoMouse);
             if (this.fase == 1)
             {
-                movimentoFase1();
+                
             }
             this.Refresh();
 
@@ -106,48 +110,49 @@ namespace Trabalho_Final_CG
 
         public void mover()
         {
-
+            
             if (this.fase == 1)
             {
-                movimentoFase1();
+
             }
 
         }
 
 
-        public void movimentoFase1()
-        {
-            if (cont < 500)
-            {
-                this.alvo.translacao("direita", this.velocidade);
-                this.cont++;
-            }
-            if (cont >= 500 && cont < 700)
-            {
-                this.alvo.translacao("cima", this.velocidade);
-                this.cont++;
-            }
-            if (cont >= 700 && cont < 1200)
-            {
-                this.alvo.translacao("esquerda", this.velocidade);
-                this.cont++;
-            }
-            if (cont >= 1200 && cont < 1400)
-            {
-                this.alvo.translacao("baixo", this.velocidade);
-                this.cont++;
-            }
-            if (cont >= 1400 && cont < 1838)
-            {
-                this.alvo.translacao("cimaDireita", this.velocidade);
-                this.cont++;
-            }
-            if (cont >= 1838 && cont < 2306)
-            {
-                this.alvo.translacao("baixoDireita", this.velocidade);
-                this.cont++;
-            }
-        }
+        //public void movimentoFase1()
+        //{
+            
+        //    if (cont < 1500/this.velocidade)
+        //    {
+        //        this.alvo.translacao("direita", this.velocidade);
+        //        this.cont++;
+        //    }
+        //    if (cont >= 500 / this.velocidade && cont < 700 / this.velocidade)
+        //    {
+        //        this.alvo.translacao("cima", this.velocidade);
+        //        this.cont++;
+        //    }
+        //    if (cont >= 700 && cont < 1200)
+        //    {
+        //        this.alvo.translacao("esquerda", this.velocidade);
+        //        this.cont++;
+        //    }
+        //    if (cont >= 1200 && cont < 1400)
+        //    {
+        //        this.alvo.translacao("baixo", this.velocidade);
+        //        this.cont++;
+        //    }
+        //    if (cont >= 1400 && cont < 1838)
+        //    {
+        //        this.alvo.translacao("cimaDireita", this.velocidade);
+        //        this.cont++;
+        //    }
+        //    if (cont >= 1838 && cont < 2306)
+        //    {
+        //        this.alvo.translacao("baixoDireita", this.velocidade);
+        //        this.cont++;
+        //    }
+        //}
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
@@ -177,10 +182,5 @@ namespace Trabalho_Final_CG
             return this.posicaoMouse;
         }//end getPosicaoMouse
 
-
-        public void atualizar(Velocidade_Subject sujeito)
-        {
-            this.velocidade = ((PopUpVelocidade)sujeito).getVelocidade();
-        }
     }
 }

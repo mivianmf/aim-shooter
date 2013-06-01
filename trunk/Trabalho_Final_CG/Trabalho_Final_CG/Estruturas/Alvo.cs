@@ -4,20 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Drawing;
+using Trabalho_Final_CG.Interfaces;
 
 namespace Trabalho_Final_CG.Estruturas
 {
-    class Alvo
+    class Alvo : Movimento_Observer
     {
         private Circulo[] circulos;
         private Brush pincel;
         private const int quantidade_circulos = 4;
-        private Point centro = new Point(350, 600);
+        private Point centro;
 
-        public Alvo()
+        public Alvo(Point centro)
         {
-
             Random aleatorio = new Random();
+
+            this.centro = centro;
 
             this.pincel = new SolidBrush(System.Drawing.Color.Black);
 
@@ -62,50 +64,48 @@ namespace Trabalho_Final_CG.Estruturas
                 this.centro.X - raioAtual, this.centro.Y - raioAtual,
                 raioAtual * 2, raioAtual * 2);
         }//end draw
+        
+        //public void translacao(String direcao, int velocidade)
+        //{
+        //    switch (direcao)
+        //    {
+        //        case "direita":
+        //            this.centro.X += velocidade;
+        //            break;
+        //        case "esquerda":
+        //            this.centro.X -= velocidade;
+        //            break;
 
+        //        case "cima":
+        //            this.centro.Y -= velocidade;
+        //            break;
 
+        //        case "baixo":
+        //            this.centro.Y += velocidade;
+        //            break;
 
-        public void translacao(String direcao, int velocidade)
-        {
-            switch (direcao)
-            {
-                case "direita":
-                    this.centro.X += velocidade;
-                    break;
-                case "esquerda":
-                    this.centro.X -= velocidade;
-                    break;
+        //        case "cimaEsquerda":
+        //            this.centro.X -= velocidade;
+        //            this.centro.Y -= velocidade;
+        //            break;
 
-                case "cima":
-                    this.centro.Y -= velocidade;
-                    break;
+        //        case "cimaDireita":
+        //            this.centro.X += velocidade;
+        //            this.centro.Y -= velocidade;
+        //            break;
 
-                case "baixo":
-                    this.centro.Y += velocidade;
-                    break;
+        //        case "baixoEsquerda":
+        //            this.centro.X -= velocidade;
+        //            this.centro.Y += velocidade;
+        //            break;
 
-                case "cimaEsquerda":
-                    this.centro.X -= velocidade;
-                    this.centro.Y -= velocidade;
-                    break;
+        //        case "baixoDireita":
+        //            this.centro.X += velocidade;
+        //            this.centro.Y += velocidade;
+        //            break;
 
-                case "cimaDireita":
-                    this.centro.X += velocidade;
-                    this.centro.Y -= velocidade;
-                    break;
-
-                case "baixoEsquerda":
-                    this.centro.X -= velocidade;
-                    this.centro.Y += velocidade;
-                    break;
-
-                case "baixoDireita":
-                    this.centro.X += velocidade;
-                    this.centro.Y += velocidade;
-                    break;
-
-            }
-        }//end translação
+        //    }
+        //}//end translação
 
         public int estaDentro(Point ponto)
         {
@@ -119,6 +119,10 @@ namespace Trabalho_Final_CG.Estruturas
             return 0;
         }//end estaDentro
 
+        public void atualizar(Movimento_Subject sujeito)
+        {
+            this.centro = ((Fase)sujeito).getPontoCentral();
+        }
     }//end class Alvo
 
 }//end namespace
