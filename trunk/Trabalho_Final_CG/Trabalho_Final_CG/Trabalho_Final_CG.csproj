@@ -80,11 +80,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Recursos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Properties\madeira.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Recursos\madeira.jpg" />
+    <Content Include="Recursos\pisomadeira.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

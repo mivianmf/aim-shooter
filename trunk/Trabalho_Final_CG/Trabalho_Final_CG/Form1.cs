@@ -91,11 +91,12 @@ namespace Trabalho_Final_CG
 
         public void  mover(){
 
-            if (cont < 100) 
+            if (cont < 20) 
             {
                 this.alvo.translacao("direita", 2);
+
             }
-            if (cont >=100 && cont < 150 )
+            if (cont >=20 && cont <  )
             {
                 this.alvo.translacao("cima",2);
             }
