@@ -52,10 +52,21 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Velocidade_Observer.cs" />
+    <Compile Include="PopUpVelocidade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopUpVelocidade.Designer.cs">
+      <DependentUpon>PopUpVelocidade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\Velocidade_Subject.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopUpVelocidade.resx">
+      <DependentUpon>PopUpVelocidade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

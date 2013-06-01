@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows;
+using Trabalho_Final_CG.Interfaces;
 
 namespace Trabalho_Final_CG
 {
     using Trabalho_Final_CG.Estruturas;
-    public partial class Aplicacao : Form
+    public partial class Aplicacao : Form, Velocidade_Observer
     {
         private Brush pincel;
+        private PopUpVelocidade popUpVelocidade;
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         private int cont = 0;
@@ -22,11 +24,14 @@ namespace Trabalho_Final_CG
         private Bitmap imagemFundo = new Bitmap("../../Recursos/madeira.jpg");
         private Point posicaoMouse;
         private long pontuacao;
+        private int velocidade;
 
         public Aplicacao()
         {
             InitializeComponent();
 
+            //PopUp
+            this.popUpVelocidade = new PopUpVelocidade();
 
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
@@ -41,6 +46,8 @@ namespace Trabalho_Final_CG
             this.pincel = new SolidBrush(System.Drawing.Color.Black);
 
             this.pontuacao = 0L;
+
+            this.velocidade = 1;
 
             this.alvo = new Alvo();
 
@@ -112,32 +119,32 @@ namespace Trabalho_Final_CG
         {
             if (cont < 500)
             {
-                this.alvo.translacao("direita", 1);
+                this.alvo.translacao("direita", this.velocidade);
                 this.cont++;
             }
             if (cont >= 500 && cont < 700)
             {
-                this.alvo.translacao("cima", 1);
+                this.alvo.translacao("cima", this.velocidade);
                 this.cont++;
             }
             if (cont >= 700 && cont < 1200)
             {
-                this.alvo.translacao("esquerda", 1);
+                this.alvo.translacao("esquerda", this.velocidade);
                 this.cont++;
             }
             if (cont >= 1200 && cont < 1400)
             {
-                this.alvo.translacao("baixo", 1);
+                this.alvo.translacao("baixo", this.velocidade);
                 this.cont++;
             }
             if (cont >= 1400 && cont < 1838)
             {
-                this.alvo.translacao("cimaDireita", 1);
+                this.alvo.translacao("cimaDireita", this.velocidade);
                 this.cont++;
             }
             if (cont >= 1838 && cont < 2306)
             {
-                this.alvo.translacao("baixoDireita", 1);
+                this.alvo.translacao("baixoDireita", this.velocidade);
                 this.cont++;
             }
         }
@@ -170,5 +177,10 @@ namespace Trabalho_Final_CG
             return this.posicaoMouse;
         }//end getPosicaoMouse
 
+
+        public void atualizar(Velocidade_Subject sujeito)
+        {
+            this.velocidade = ((PopUpVelocidade)sujeito).getVelocidade();
+        }
     }
 }
