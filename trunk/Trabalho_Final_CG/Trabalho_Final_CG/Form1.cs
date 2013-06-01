@@ -18,13 +18,13 @@ namespace Trabalho_Final_CG
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         private int cont = 0;
-        
+        private Bitmap imagemFundo = new Bitmap("C:/Users/Mí/Documents/Visual Studio 2012/Projects/Trabalho_Final_CG/Trabalho_Final_CG/Trabalho_Final_CG/Properties/madeira.jpg");
+
         public Aplicacao()
         {
             InitializeComponent();
             
             
-
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
 
@@ -51,64 +51,57 @@ namespace Trabalho_Final_CG
             //EVENTOS
             this.MouseMove += Aplicacao_MouseMove;
             this.MouseClick += Aplicacao_MouseClick;
+            bg_thread.ProgressChanged += new ProgressChangedEventHandler(funciona);
+            bg_thread.DoWork += new DoWorkEventHandler(funcionaT);
         }
+
+        
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+           
+        }
+        
 
         protected override void OnPaint(PaintEventArgs e)
         {
-      
-            this.Refresh();
-            if (this.cont < 250){
-                this.alvo.drawCima(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont>= 250 && cont< 800 ){
-                this.alvo.drawDireita(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 800 && cont < 1050)
-            {
-                this.alvo.drawBaixo(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 1050 && cont < 1600)
-            {
-                this.alvo.drawEsquerda(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 1600 && cont < 1900)
-            {
-                this.alvo.drawCimaDireita(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 1900 && cont < 2100)
-            {
-                this.alvo.drawCimaEsquerda(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 2100 && cont < 2300)
-            {
-                this.alvo.drawBaixoEsquerda(e.Graphics);
-                this.cont++;
-            }
-            if (this.cont >= 2300 && cont < 2600)
-            {
-                this.alvo.drawBaixoDireita(e.Graphics);
-                this.cont++;
-            }
-
-
-
-
-             Console.WriteLine("SAIU");
-        
- 
+            e.Graphics.DrawImage(imagemFundo, 0, 0, this.Width, this.Height);
+            this.alvo.draw(e.Graphics);
         }//end OnPaint
 
 
-        public static void  mover(){
 
-            
+
+        private void funcionaT(object obj, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = (BackgroundWorker)obj;
+
+            for (; ;) 
+            {
+                System.Threading.Thread.Sleep(40);
+                worker.ReportProgress(0);
+            }
         }
+
+        private void funciona(object obj, ProgressChangedEventArgs e)
+        {
+            mover();
+            this.Refresh();
+
+        }
+
+        public void  mover(){
+
+            if (cont < 100) 
+            {
+                this.alvo.translacao("direita", 2);
+            }
+            if (cont >=100 && cont < 150 )
+            {
+                this.alvo.translacao("cima",2);
+            }
+
+
+       }
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
