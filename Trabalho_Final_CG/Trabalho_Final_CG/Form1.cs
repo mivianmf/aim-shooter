@@ -20,12 +20,14 @@ namespace Trabalho_Final_CG
         private int cont = 0;
         private int fase = 1;
         private Bitmap imagemFundo = new Bitmap("../../Recursos/madeira.jpg");
+        private Point posicaoMouse;
+        private long pontuacao;
 
         public Aplicacao()
         {
             InitializeComponent();
-            
-            
+
+
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
 
@@ -37,7 +39,9 @@ namespace Trabalho_Final_CG
 
             //ATRIBUTOS
             this.pincel = new SolidBrush(System.Drawing.Color.Black);
-            
+
+            this.pontuacao = 0L;
+
             this.alvo = new Alvo();
 
             this.SetStyle(
@@ -56,27 +60,25 @@ namespace Trabalho_Final_CG
             bg_thread.DoWork += new DoWorkEventHandler(funcionaT);
         }
 
-        
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-           
+
         }
-        
 
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(imagemFundo, 0, 0, this.Width, this.Height);
             this.alvo.draw(e.Graphics);
+            e.Graphics.DrawString(this.pontuacao.ToString(),
+                new Font(FontFamily.GenericSansSerif, 50),
+                this.pincel, 100, 100);
         }//end OnPaint
-
-
-
 
         private void funcionaT(object obj, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)obj;
 
-            for (; ;) 
+            for (; ; )
             {
                 System.Threading.Thread.Sleep(40);
                 worker.ReportProgress(0);
@@ -85,43 +87,45 @@ namespace Trabalho_Final_CG
 
         private void funciona(object obj, ProgressChangedEventArgs e)
         {
+            this.pontuacao += this.alvo.estaDentro(this.posicaoMouse);
             if (this.fase == 1)
             {
                 movimentoFase1();
             }
-                this.Refresh();
-            
+            this.Refresh();
+
 
         }
 
-        public void  mover(){
+        public void mover()
+        {
 
             if (this.fase == 1)
             {
                 movimentoFase1();
             }
 
-       }
+        }
 
 
-        public void movimentoFase1() 
+        public void movimentoFase1()
         {
             if (cont < 500)
             {
                 this.alvo.translacao("direita", 1);
                 this.cont++;
             }
-            if (cont >= 500 && cont < 700 )
+            if (cont >= 500 && cont < 700)
             {
                 this.alvo.translacao("cima", 1);
                 this.cont++;
             }
-            if (cont >= 700 && cont < 1200) 
+            if (cont >= 700 && cont < 1200)
             {
-                this.alvo.translacao("esquerda",1);
+                this.alvo.translacao("esquerda", 1);
                 this.cont++;
             }
-            if (cont >= 1200 && cont < 1400) 
+            if (cont >= 1200 && cont < 1400)
             {
                 this.alvo.translacao("baixo", 1);
                 this.cont++;
@@ -131,7 +135,7 @@ namespace Trabalho_Final_CG
                 this.alvo.translacao("cimaDireita", 1);
                 this.cont++;
             }
-            if (cont>= 1838 && cont < 2306 )
+            if (cont >= 1838 && cont < 2306)
             {
                 this.alvo.translacao("baixoDireita", 1);
                 this.cont++;
@@ -140,19 +144,31 @@ namespace Trabalho_Final_CG
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
-            
+
             g.FillEllipse(pincel, x, y, 2, 2);
 
         }//end desenhar
-
-        private void Aplicacao_MouseMove(object sender, MouseEventArgs args)
-        {
-            
-        }//end mouseMove
 
         private void Aplicacao_MouseClick(object sender, MouseEventArgs args)
         {
 
         }//end mouseClick
+
+        private void Aplicacao_MouseMove(object sender, MouseEventArgs args)
+        {
+            this.posicaoMouse.X = args.X;
+            this.posicaoMouse.Y = args.Y;
+
+            //Console.WriteLine("Circulo = " + this.alvo.estaDentro(this.posicaoMouse));
+            
+            //Console.Write("X = " + args.X);
+            //Console.WriteLine(" Y = " + args.Y);
+        }//end mouseMove
+
+        public Point getPosicaoMouse()
+        {
+            return this.posicaoMouse;
+        }//end getPosicaoMouse
+
     }
 }
