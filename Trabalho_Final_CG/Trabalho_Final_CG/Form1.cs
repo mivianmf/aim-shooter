@@ -18,7 +18,8 @@ namespace Trabalho_Final_CG
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         private int cont = 0;
-        private Bitmap imagemFundo = new Bitmap("C:/Users/Mí/Documents/Visual Studio 2012/Projects/Trabalho_Final_CG/Trabalho_Final_CG/Trabalho_Final_CG/Properties/madeira.jpg");
+        private int fase = 1;
+        private Bitmap imagemFundo = new Bitmap("../../Recursos/madeira.jpg");
 
         public Aplicacao()
         {
@@ -84,25 +85,58 @@ namespace Trabalho_Final_CG
 
         private void funciona(object obj, ProgressChangedEventArgs e)
         {
-            mover();
-            this.Refresh();
+            if (this.fase == 1)
+            {
+                movimentoFase1();
+            }
+                this.Refresh();
+            
 
         }
 
         public void  mover(){
 
-            if (cont < 20) 
+            if (this.fase == 1)
             {
-                this.alvo.translacao("direita", 2);
-
+                movimentoFase1();
             }
-            if (cont >=20 && cont <  )
-            {
-                this.alvo.translacao("cima",2);
-            }
-
 
        }
+
+
+        public void movimentoFase1() 
+        {
+            if (cont < 500)
+            {
+                this.alvo.translacao("direita", 1);
+                this.cont++;
+            }
+            if (cont >= 500 && cont < 700 )
+            {
+                this.alvo.translacao("cima", 1);
+                this.cont++;
+            }
+            if (cont >= 700 && cont < 1200) 
+            {
+                this.alvo.translacao("esquerda",1);
+                this.cont++;
+            }
+            if (cont >= 1200 && cont < 1400) 
+            {
+                this.alvo.translacao("baixo", 1);
+                this.cont++;
+            }
+            if (cont >= 1400 && cont < 1838)
+            {
+                this.alvo.translacao("cimaDireita", 1);
+                this.cont++;
+            }
+            if (cont>= 1838 && cont < 2306 )
+            {
+                this.alvo.translacao("baixoDireita", 1);
+                this.cont++;
+            }
+        }
 
         public static void desenhar(Graphics g, Brush pincel, int x, int y)
         {
