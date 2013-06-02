@@ -17,9 +17,10 @@ namespace Trabalho_Final_CG
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Aplicacao aplicacao = new Aplicacao();
+            Form2 form2 = new Form2();
+            Application.Run(form2);
+            Application.Run(new Aplicacao(form2.getFase(), form2.getVelocidade()));
 
-            Application.Run(aplicacao);
         }
     }
 }
