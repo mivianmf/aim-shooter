@@ -28,7 +28,7 @@ namespace Trabalho_Final_CG
         public Aplicacao()
         {
             InitializeComponent();
-            
+
             //BACKGROUND COLOR
             this.BackColor = System.Drawing.Color.White;
 
@@ -43,7 +43,7 @@ namespace Trabalho_Final_CG
 
             this.pontuacao = 0L;
             this.faseAtual = 1;
-                        
+
             this.SetStyle(
                 System.Windows.Forms.ControlStyles.UserPaint |
                 System.Windows.Forms.ControlStyles.AllPaintingInWmPaint |
@@ -61,10 +61,14 @@ namespace Trabalho_Final_CG
 
             //TODO: IMPORTANTE
             this.fases = new Fase[1];
-            Desenho quad = new Desenho(3);
-            Point[]vertices = {new Point(350,350),new Point(700,350), new Point (350,100)};
-            quad.setVertices(vertices);
-            this.fases[0] = new Fase(1, quad, 3);
+            Desenho estrela = new Desenho(9);
+            Point[] pontosEstrela = { new Point(400, 500), new Point (500,370),
+                       new Point(655,300), new Point(500,200),
+        new Point(400,55), new Point(300,200),
+        new Point (135,300), new Point(300,370),
+        new Point(400, 500)};
+            estrela.setVertices(pontosEstrela);
+            this.fases[0] = new Fase(1, estrela, 1);
             this.alvo = new Alvo(this.fases[0].getPontoCentral());
             this.fases[0].adicionarObservador(this.alvo);
             this.fases[0].adicionarObservador(this);
@@ -88,7 +92,7 @@ namespace Trabalho_Final_CG
         {
             BackgroundWorker worker = (BackgroundWorker)obj;
 
-            for (;;)
+            for (; ; )
             {
                 System.Threading.Thread.Sleep(40);
                 worker.ReportProgress(0);
@@ -102,19 +106,8 @@ namespace Trabalho_Final_CG
                 this.fases[0].iniciar();
                 this.faseAtual = -1;
             }
-                
+
         }
-
-        private void Aplicacao_MouseClick(object sender, MouseEventArgs args)
-        {
-
-        }//end mouseClick
-
-        private void Aplicacao_MouseMove(object sender, MouseEventArgs args)
-        {
-            //this.posicaoMouse.X = args.X;
-            //this.posicaoMouse.Y = args.Y;
-        }//end mouseMove
 
         public Point getPosicaoMouse()
         {
@@ -123,7 +116,6 @@ namespace Trabalho_Final_CG
 
         public void atualizar(Movimento_Subject sujeito)
         {
-            //this.centro = ((Fase)sujeito).getPontoCentral();
             this.pontuacao += this.alvo.estaDentro(Cursor.Position);
             this.Refresh();
         }//end atualizar
