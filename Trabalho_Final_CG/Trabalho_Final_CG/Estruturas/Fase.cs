@@ -34,13 +34,96 @@ namespace Trabalho_Final_CG.Estruturas
                 this.caminharEntreVertices(vertices[i], vertices[i + 1]);
             }//end for
             //Caminha do último até o primeiro
-            this.caminharEntreVertices(vertices[vertices.Length - 1], vertices[0]);
+            //this.caminharEntreVertices(vertices[vertices.Length - 1], vertices[0]);
         }
 
         private void caminharEntreVertices(Point vertice1, Point vertice2)
         {
             this.DDA(vertice1, vertice2);
         }
+
+        /*
+     
+
+        public void bresenhamReta (Point p1, Point p2)
+        {
+	        int dx, dy, x, y ,const1, const2, p;
+	        int incrX= 0;
+	        int incrY = 0;
+	
+	        dx = Math.Abs(p2.X - p1.X);
+	        dy = Math.Abs(p2.X - p1.Y);
+	
+	        if (dx >= 0)
+		        incrX = this.velocidade;
+	        else
+	        {
+		        incrX = ((-1)*this.velocidade);
+		        dx = ((-1)*dx);
+	        }
+	        if (dy>=0)
+		        incrY = this.velocidade;
+	        else
+	        {
+		        incrY = ((-1)*this.velocidade);
+		        dy = ((-1)*dy);
+	        }
+	
+	        x = p1.X;
+	        y = p1.Y;
+	        this.pontoCentral = new Point (x,y);
+	        this.notificar();
+	
+	        if (dy < dx)
+	        {
+		        p = 2*(dy-dx);
+		        const1 = 2*dy;
+		        const2= 2*(dy-dx);
+		
+		        for (int i =0; i < dx; i++)
+		        {
+			        x+= incrX;
+			
+			        if (p<0)
+			        {
+				        p+= const1;
+			        }
+			        else
+			        {
+				        y += incrY;
+				        p+= const2;
+			        }
+			        this.pontoCentral = new Point (x,y);
+			        this.notificar();
+		        }
+	
+	        }
+	        else
+	        {
+		        p=2*dx-dy;
+		        const1 = 2*dx;
+		        const2 = 2*(dx-dy);
+		
+		        for(int j = 0; j < dy; j++)
+		        {
+			        y+= incrY;
+			        if (p<0)
+			        {
+				        p+=const1;
+			        }
+			        else
+			        {
+				        x+= incrX;
+				        p+= const2;
+			        }
+			        this.pontoCentral = new Point (x,y);
+			        this.notificar();
+		        }
+	        }
+        }
+        */
+        
+        
 
         //Algoritmo de Bresenham DDA inteiro
         private void DDA(Point p1, Point p2)
@@ -61,53 +144,54 @@ namespace Trabalho_Final_CG.Estruturas
             {
                 /*x = p2.X;
                 y = p2.Y;*/
+
                 deltaX = p1.X - p2.X;
                 deltaY = p1.Y - p2.Y;
                 if (deltaX >= 0)
                 {
                     if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        for (int i = 1; i < Math.Abs(deltaX); i++)
+                        for (int i = 1; i < Math.Abs(deltaX) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x++;
+                                x += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY;
+                                erro += deltaY*this.velocidade;
                             }
                             else
                             {
-                                x++;
-                                y--;
+                                x+=this.velocidade;
+                                y-=this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY - deltaX;
+                                erro += (deltaY - deltaX)*this.velocidade;
                             }
                         }
                     }
                     else
                     {
-                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        for (int i = 1; i < Math.Abs(deltaY) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x++;
-                                y--;
+                                x += this.velocidade;
+                                y -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY - deltaX;
+                                erro += (deltaY - deltaX)*this.velocidade;
                             }
                             else
                             {
-                                y--;
+                                y -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro -= deltaX;
+                                erro -= deltaX*this.velocidade;
                             }
                         }
                     }
@@ -116,47 +200,47 @@ namespace Trabalho_Final_CG.Estruturas
                 { // deltaX<0
                     if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        for (int i = 1; i < Math.Abs(deltaX); i++)
+                        for (int i = 1; i < Math.Abs(deltaX) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x--;
+                                x -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY;
+                                erro += deltaY*this.velocidade;
                             }
                             else
                             {
-                                x--;
-                                y--;
+                                x -= this.velocidade;
+                                y -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY + deltaX;
+                                erro += (deltaY + deltaX)*this.velocidade;
                             }
                         }
                     }
                     else
                     {
-                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        for (int i = 1; i < Math.Abs(deltaY) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x--;
-                                y--;
+                                x -= this.velocidade;
+                                y -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY + deltaX;
+                                erro += (deltaY + deltaX)*this.velocidade;
                             }
                             else
                             {
-                                y--;
+                                y -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaX;
+                                erro += deltaX*this.velocidade;
                             }//end else
                         }//end for
                     }//end else
@@ -168,47 +252,47 @@ namespace Trabalho_Final_CG.Estruturas
                 {
                     if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        for (int i = 1; i < Math.Abs(deltaX); i++)
+                        for (int i = 1; i < Math.Abs(deltaX) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x++;
+                                x += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY;
+                                erro += deltaY*this.velocidade;
                             }
                             else
                             {
-                                x++;
-                                y++;
+                                x += this.velocidade;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY - deltaX;
+                                erro += (deltaY - deltaX)*this.velocidade;
                             }
                         }
                     }
                     else
                     {
-                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        for (int i = 1; i < Math.Abs(deltaY) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x++;
-                                y++;
+                                x += this.velocidade;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY - deltaX;
+                                erro += (deltaY - deltaX)*this.velocidade;
                             }
                             else
                             {
-                                y++;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro -= deltaX;
+                                erro -= deltaX*this.velocidade;
                             }
                         }
                     }
@@ -217,47 +301,47 @@ namespace Trabalho_Final_CG.Estruturas
                 { // deltaX<0
                     if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        for (int i = 1; i < Math.Abs(deltaX); i++)
+                        for (int i = 1; i < Math.Abs(deltaX) / this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x--;
+                                x -= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY;
+                                erro += deltaY*this.velocidade;
                             }
                             else
                             {
-                                x--;
-                                y++;
+                                x -= this.velocidade;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY + deltaX;
+                                erro += (deltaY + deltaX)*this.velocidade;
                             }
                         }
                     }
                     else
                     {
-                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        for (int i = 1; i < Math.Abs(deltaY)/this.velocidade; i++)
                         {
                             if (erro < 0)
                             {
-                                x--;
-                                y++;
+                                x -= this.velocidade;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaY + deltaX;
+                                erro += (deltaY + deltaX)*this.velocidade;
                             }
                             else
                             {
-                                y++;
+                                y += this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
-                                erro += deltaX;
+                                erro += deltaX*this.velocidade;
                             }//end else
                         }//end for
                     }//end else
