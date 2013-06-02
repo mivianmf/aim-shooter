@@ -68,7 +68,7 @@ namespace Trabalho_Final_CG
         new Point (135,300), new Point(300,370),
         new Point(400, 500)};
             estrela.setVertices(pontosEstrela);
-            this.fases[0] = new Fase(1, estrela, 1);
+            this.fases[0] = new Fase(1, estrela, 5);
             this.alvo = new Alvo(this.fases[0].getPontoCentral());
             this.fases[0].adicionarObservador(this.alvo);
             this.fases[0].adicionarObservador(this);
@@ -86,6 +86,10 @@ namespace Trabalho_Final_CG
             e.Graphics.DrawString(this.pontuacao.ToString(),
                 new Font(FontFamily.GenericSansSerif, 50),
                 this.pincel, 100, 100);
+
+
+            /*e.Graphics.DrawEllipse(new Pen(this.pincel), this.alvo.getCentro().X - 1,
+                                    this.alvo.getCentro().Y - 1, 2, 2);*/
         }//end OnPaint
 
         private void funcionaT(object obj, DoWorkEventArgs e)

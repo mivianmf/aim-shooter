@@ -51,9 +51,9 @@ namespace Trabalho_Final_CG.Estruturas
             dy = p2.Y - p1.Y;
             
             if (Math.Abs(dx) > Math.Abs(dy))
-                passos = Math.Abs(dx);
+                passos = Math.Abs(dx) / this.velocidade;
             else
-                passos = Math.Abs(dy);
+                passos = Math.Abs(dy) / this.velocidade;
 
             x = p1.X;
             y = p1.Y;
@@ -62,7 +62,7 @@ namespace Trabalho_Final_CG.Estruturas
 
             double incrX = (double)dx / (double)passos;
             double incrY = (double)dy / (double)passos;
-
+            
             for (int i = 0; i < passos; i++)
             {
                 x += incrX;
