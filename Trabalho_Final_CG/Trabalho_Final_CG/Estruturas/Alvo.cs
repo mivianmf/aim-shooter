@@ -65,48 +65,6 @@ namespace Trabalho_Final_CG.Estruturas
                 raioAtual * 2, raioAtual * 2);
         }//end draw
         
-        //public void translacao(String direcao, int velocidade)
-        //{
-        //    switch (direcao)
-        //    {
-        //        case "direita":
-        //            this.centro.X += velocidade;
-        //            break;
-        //        case "esquerda":
-        //            this.centro.X -= velocidade;
-        //            break;
-
-        //        case "cima":
-        //            this.centro.Y -= velocidade;
-        //            break;
-
-        //        case "baixo":
-        //            this.centro.Y += velocidade;
-        //            break;
-
-        //        case "cimaEsquerda":
-        //            this.centro.X -= velocidade;
-        //            this.centro.Y -= velocidade;
-        //            break;
-
-        //        case "cimaDireita":
-        //            this.centro.X += velocidade;
-        //            this.centro.Y -= velocidade;
-        //            break;
-
-        //        case "baixoEsquerda":
-        //            this.centro.X -= velocidade;
-        //            this.centro.Y += velocidade;
-        //            break;
-
-        //        case "baixoDireita":
-        //            this.centro.X += velocidade;
-        //            this.centro.Y += velocidade;
-        //            break;
-
-        //    }
-        //}//end translação
-
         public int estaDentro(Point ponto)
         {
             for (int i = this.circulos.Length - 1; i >= 0; i--)
@@ -122,7 +80,7 @@ namespace Trabalho_Final_CG.Estruturas
         public void atualizar(Movimento_Subject sujeito)
         {
             this.centro = ((Fase)sujeito).getPontoCentral();
-        }
+        }//end atualizar
     }//end class Alvo
 
 }//end namespace

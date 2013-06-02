@@ -22,6 +22,7 @@ namespace Trabalho_Final_CG.Estruturas
             this.velocidade = velocidade;
             this.numFase = numFase;
             this.observadores = new List<Movimento_Observer>();
+            this.pontoCentral = desenhoFase.getVertices()[0];
         }
 
         public void iniciar()
@@ -32,6 +33,8 @@ namespace Trabalho_Final_CG.Estruturas
             {
                 this.caminharEntreVertices(vertices[i], vertices[i + 1]);
             }//end for
+            //Caminha do último até o primeiro
+            this.caminharEntreVertices(vertices[vertices.Length - 1], vertices[0]);
         }
 
         private void caminharEntreVertices(Point vertice1, Point vertice2)
@@ -49,116 +52,217 @@ namespace Trabalho_Final_CG.Estruturas
             deltaX = p2.X - p1.X;
             deltaY = p2.Y - p1.Y;
 
-            if ((Math.Abs(deltaY) >= Math.Abs(deltaX) && p1.Y > p2.Y)
-                || (Math.Abs(deltaY) < Math.Abs(deltaX) && deltaY < 0))
-            {
-
-                x = p2.X;
-                y = p2.Y;
-                deltaX = p1.X - p2.X;
-                deltaY = p1.Y - p2.Y;
-            }
             this.pontoCentral = p1;
             //Notifica as mudanças ao observador para transladar
             this.notificar();
-            if (deltaX >= 0)
+
+            if ((Math.Abs(deltaY) >= Math.Abs(deltaX) && p1.Y > p2.Y)
+                || (Math.Abs(deltaY) < Math.Abs(deltaX) && deltaY < 0))
             {
-                if (Math.Abs(deltaX) >= Math.Abs(deltaY))
+                /*x = p2.X;
+                y = p2.Y;*/
+                deltaX = p1.X - p2.X;
+                deltaY = p1.Y - p2.Y;
+                if (deltaX >= 0)
                 {
-                    for (int i = 1; i < Math.Abs(deltaX); i++)
+                    if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        if (erro < 0)
+                        for (int i = 1; i < Math.Abs(deltaX); i++)
                         {
-                            x++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY;
+                            if (erro < 0)
+                            {
+                                x++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY;
+                            }
+                            else
+                            {
+                                x++;
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY - deltaX;
+                            }
                         }
-                        else
+                    }
+                    else
+                    {
+                        for (int i = 1; i < Math.Abs(deltaY); i++)
                         {
-                            x++;
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY - deltaX;
+                            if (erro < 0)
+                            {
+                                x++;
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY - deltaX;
+                            }
+                            else
+                            {
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro -= deltaX;
+                            }
                         }
                     }
                 }
                 else
-                {
-                    for (int i = 1; i < Math.Abs(deltaY); i++)
+                { // deltaX<0
+                    if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        if (erro < 0)
+                        for (int i = 1; i < Math.Abs(deltaX); i++)
                         {
-                            x++;
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY - deltaX;
-                        }
-                        else
-                        {
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro -= deltaX;
+                            if (erro < 0)
+                            {
+                                x--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY;
+                            }
+                            else
+                            {
+                                x--;
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY + deltaX;
+                            }
                         }
                     }
-                }
+                    else
+                    {
+                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        {
+                            if (erro < 0)
+                            {
+                                x--;
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY + deltaX;
+                            }
+                            else
+                            {
+                                y--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaX;
+                            }//end else
+                        }//end for
+                    }//end else
+                }//end else
             }
             else
-            { // deltaX<0
-                if (Math.Abs(deltaX) >= Math.Abs(deltaY))
+            {
+                if (deltaX >= 0)
                 {
-                    for (int i = 1; i < Math.Abs(deltaX); i++)
+                    if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        if (erro < 0)
+                        for (int i = 1; i < Math.Abs(deltaX); i++)
                         {
-                            x--;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY;
+                            if (erro < 0)
+                            {
+                                x++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY;
+                            }
+                            else
+                            {
+                                x++;
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY - deltaX;
+                            }
                         }
-                        else
+                    }
+                    else
+                    {
+                        for (int i = 1; i < Math.Abs(deltaY); i++)
                         {
-                            x--;
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY + deltaX;
+                            if (erro < 0)
+                            {
+                                x++;
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY - deltaX;
+                            }
+                            else
+                            {
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro -= deltaX;
+                            }
                         }
                     }
                 }
                 else
-                {
-                    for (int i = 1; i < Math.Abs(deltaY); i++)
+                { // deltaX<0
+                    if (Math.Abs(deltaX) >= Math.Abs(deltaY))
                     {
-                        if (erro < 0)
+                        for (int i = 1; i < Math.Abs(deltaX); i++)
                         {
-                            x--;
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaY + deltaX;
-                        }
-                        else
-                        {
-                            y++;
-                            this.pontoCentral = new Point(x, y);
-                            //Notifica as mudanças ao observador para transladar
-                            this.notificar();
-                            erro += deltaX;
+                            if (erro < 0)
+                            {
+                                x--;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY;
+                            }
+                            else
+                            {
+                                x--;
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY + deltaX;
+                            }
                         }
                     }
-                }
-            }
+                    else
+                    {
+                        for (int i = 1; i < Math.Abs(deltaY); i++)
+                        {
+                            if (erro < 0)
+                            {
+                                x--;
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaY + deltaX;
+                            }
+                            else
+                            {
+                                y++;
+                                this.pontoCentral = new Point(x, y);
+                                //Notifica as mudanças ao observador para transladar
+                                this.notificar();
+                                erro += deltaX;
+                            }//end else
+                        }//end for
+                    }//end else
+                }//end else
+            }//end else
         }
 
 
