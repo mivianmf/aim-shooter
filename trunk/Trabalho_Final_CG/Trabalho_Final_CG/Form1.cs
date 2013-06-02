@@ -21,9 +21,9 @@ namespace Trabalho_Final_CG
         private Fase[] fases;
         private int faseAtual;
         private Bitmap imagemFundo = new Bitmap("../../Recursos/madeira.jpg");
-        private Point posicaoMouse;
         private long pontuacao;
         private int velocidade;
+        private List<Point> pontosDoDesenhoAtual;
 
         public Aplicacao()
         {
@@ -40,6 +40,7 @@ namespace Trabalho_Final_CG
 
             //ATRIBUTOS
             this.pincel = new SolidBrush(System.Drawing.Color.Black);
+            this.pontosDoDesenhoAtual = new List<Point>();
 
             this.pontuacao = 0L;
             this.faseAtual = 1;
@@ -82,14 +83,19 @@ namespace Trabalho_Final_CG
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawImage(imagemFundo, 0, 0, this.Width, this.Height);
+
+            this.pontosDoDesenhoAtual.Add(this.alvo.getCentro());
+
+            for (int i = 0; i < this.pontosDoDesenhoAtual.Count; i++)
+            {
+                e.Graphics.FillEllipse(this.pincel, this.pontosDoDesenhoAtual[i].X - 5,
+                                    this.pontosDoDesenhoAtual[i].Y - 5, 10, 10);
+            }//end for
+
             this.alvo.draw(e.Graphics);
             e.Graphics.DrawString(this.pontuacao.ToString(),
                 new Font(FontFamily.GenericSansSerif, 50),
                 this.pincel, 100, 100);
-
-
-            /*e.Graphics.DrawEllipse(new Pen(this.pincel), this.alvo.getCentro().X - 1,
-                                    this.alvo.getCentro().Y - 1, 2, 2);*/
         }//end OnPaint
 
         private void funcionaT(object obj, DoWorkEventArgs e)
@@ -112,11 +118,6 @@ namespace Trabalho_Final_CG
             }
 
         }
-
-        public Point getPosicaoMouse()
-        {
-            return this.posicaoMouse;
-        }//end getPosicaoMouse
 
         public void atualizar(Movimento_Subject sujeito)
         {
