@@ -45,7 +45,6 @@ namespace Trabalho_Final_CG
             this.pontosDoDesenhoAtual = new List<Point>();
 
             this.pontuacao = 0L;
-            //this.faseAtual = 1;
 
             this.SetStyle(
                 System.Windows.Forms.ControlStyles.UserPaint |
@@ -57,12 +56,9 @@ namespace Trabalho_Final_CG
             this.WindowState = FormWindowState.Maximized;
 
             //EVENTOS
-            //this.MouseMove += Aplicacao_MouseMove;
-            //this.MouseClick += Aplicacao_MouseClick;
             bg_thread.ProgressChanged += new ProgressChangedEventHandler(funciona);
             bg_thread.DoWork += new DoWorkEventHandler(funcionaT);
 
-            //TODO: IMPORTANTE
             this.fases = new Fase[3];
             
             //fase 1
@@ -75,7 +71,6 @@ namespace Trabalho_Final_CG
             estrela.setVertices(pontosEstrela);
             this.fases[0] = new Fase(1, estrela, this.velocidade);
             
-
             //fase 2 
             Desenho estrela5pontas = new Desenho(5);
             Point[] verticesEstrela5pontas = { new Point(190, 490), new Point(400, 125), 
@@ -90,9 +85,8 @@ namespace Trabalho_Final_CG
                                      new Point (150,500), new Point (675,250),
                                      new Point (400,75), new Point (150,250), new Point (675,500)};
             casaGrafos.setVertices(verticesCasa);
-            this.fases[2] = new Fase(3, casaGrafos,this.velocidade);
-
-            
+            this.fases[2] = new Fase(3, casaGrafos, this.velocidade);
+            this.alvo = new Alvo(this.fases[this.faseAtual - 1].getPontoCentral());        
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -131,38 +125,26 @@ namespace Trabalho_Final_CG
 
         private void funciona(object obj, ProgressChangedEventArgs e)
         {
+            if (this.faseAtual > 0)
+            {
+                this.alvo = new Alvo(this.fases[this.faseAtual - 1].getPontoCentral());
+                this.fases[this.faseAtual - 1].adicionarObservador(this.alvo);
+                this.fases[this.faseAtual - 1].adicionarObservador(this);
+                this.fases[this.faseAtual - 1].iniciar();
 
-            switch (this.faseAtual)
-            { 
-                case 1:
-                    this.alvo = new Alvo(this.fases[0].getPontoCentral());
-                    this.fases[0].adicionarObservador(this.alvo);
-                    this.fases[0].adicionarObservador(this);
-                    this.fases[0].iniciar();
-                    this.faseAtual = -1;
-                    break;
-                
-                case 2:
-                    this.alvo = new Alvo(this.fases[1].getPontoCentral());
-                    this.fases[1].adicionarObservador(this.alvo);
-                    this.fases[1].adicionarObservador(this);
-                    this.fases[1].iniciar();
-                    this.faseAtual = -1;
-                    break;
+                this.faseAtual = -1;
 
-                case 3:
-                    this.alvo = new Alvo(this.fases[2].getPontoCentral());
-                    this.fases[2].adicionarObservador(this.alvo);
-                    this.fases[2].adicionarObservador(this);
-                    this.fases[2].iniciar();
-                    this.faseAtual = -1;
-                    break;
-            }
+                string resultado = "Parabéns! Você obteve " + this.pontuacao + " pontos!";
+
+                MessageBox.Show(this, resultado, "Resultado");
+
+                this.Close();
+            }//end if            
         }
 
         public void atualizar(Movimento_Subject sujeito)
         {
-            this.pontuacao += this.alvo.estaDentro(Cursor.Position);
+            this.pontuacao += this.alvo.estaDentro(Cursor.Position) * this.velocidade;
             this.Refresh();
         }//end atualizar
     }//end class
