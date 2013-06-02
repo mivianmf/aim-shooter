@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trabalho_Final_CG.Interfaces
 {
-    interface Movimento_Subject
+    public interface Movimento_Subject
     {
         void adicionarObservador(Movimento_Observer observador);
         void notificar();
