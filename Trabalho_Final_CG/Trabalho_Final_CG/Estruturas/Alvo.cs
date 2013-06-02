@@ -81,6 +81,12 @@ namespace Trabalho_Final_CG.Estruturas
         {
             this.centro = ((Fase)sujeito).getPontoCentral();
         }//end atualizar
+
+        public Point getCentro()
+        {
+            return this.centro;
+        }
+
     }//end class Alvo
 
 }//end namespace
