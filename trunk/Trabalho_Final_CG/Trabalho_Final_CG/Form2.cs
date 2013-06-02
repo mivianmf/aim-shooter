@@ -29,8 +29,15 @@ namespace Trabalho_Final_CG
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-             //new Aplicacao (this.comboBox1.SelectedIndex+1, this.comboBox2.SelectedIndex+1);
+            if (this.comboBox1.SelectedIndex >= 0 &&
+                this.comboBox2.SelectedIndex >= 0)
+            {
+                this.Dispose();
+            }//end if
+            else
+            {
+                MessageBox.Show("Algum dos campos está vazio!", "ERRO");
+            }//end else
         }
 
         public int getFase() 
