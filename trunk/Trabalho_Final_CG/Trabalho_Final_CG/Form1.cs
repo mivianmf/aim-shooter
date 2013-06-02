@@ -19,6 +19,7 @@ namespace Trabalho_Final_CG
         private Alvo alvo;
         private BackgroundWorker bg_thread;
         private Fase[] fases;
+        private int faseAtual;
         private Bitmap imagemFundo = new Bitmap("../../Recursos/madeira.jpg");
         private Point posicaoMouse;
         private long pontuacao;
@@ -41,6 +42,7 @@ namespace Trabalho_Final_CG
             this.pincel = new SolidBrush(System.Drawing.Color.Black);
 
             this.pontuacao = 0L;
+            this.faseAtual = 1;
                         
             this.SetStyle(
                 System.Windows.Forms.ControlStyles.UserPaint |
@@ -52,8 +54,8 @@ namespace Trabalho_Final_CG
             this.WindowState = FormWindowState.Maximized;
 
             //EVENTOS
-            this.MouseMove += Aplicacao_MouseMove;
-            this.MouseClick += Aplicacao_MouseClick;
+            //this.MouseMove += Aplicacao_MouseMove;
+            //this.MouseClick += Aplicacao_MouseClick;
             bg_thread.ProgressChanged += new ProgressChangedEventHandler(funciona);
             bg_thread.DoWork += new DoWorkEventHandler(funcionaT);
 
@@ -95,7 +97,12 @@ namespace Trabalho_Final_CG
 
         private void funciona(object obj, ProgressChangedEventArgs e)
         {
-            this.fases[0].iniciar();
+            if (this.faseAtual == 1)
+            {
+                this.fases[0].iniciar();
+                this.faseAtual = -1;
+            }
+                
         }
 
         private void Aplicacao_MouseClick(object sender, MouseEventArgs args)
@@ -105,8 +112,8 @@ namespace Trabalho_Final_CG
 
         private void Aplicacao_MouseMove(object sender, MouseEventArgs args)
         {
-            this.posicaoMouse.X = args.X;
-            this.posicaoMouse.Y = args.Y;
+            //this.posicaoMouse.X = args.X;
+            //this.posicaoMouse.Y = args.Y;
         }//end mouseMove
 
         public Point getPosicaoMouse()
@@ -117,7 +124,7 @@ namespace Trabalho_Final_CG
         public void atualizar(Movimento_Subject sujeito)
         {
             //this.centro = ((Fase)sujeito).getPontoCentral();
-            this.pontuacao += this.alvo.estaDentro(this.posicaoMouse);
+            this.pontuacao += this.alvo.estaDentro(Cursor.Position);
             this.Refresh();
         }//end atualizar
     }//end class
