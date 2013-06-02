@@ -34,12 +34,42 @@ namespace Trabalho_Final_CG.Estruturas
                 this.caminharEntreVertices(vertices[i], vertices[i + 1]);
             }//end for
             //Caminha do último até o primeiro
-            //this.caminharEntreVertices(vertices[vertices.Length - 1], vertices[0]);
+            this.caminharEntreVertices(vertices[vertices.Length - 1], vertices[0]);
         }
 
         private void caminharEntreVertices(Point vertice1, Point vertice2)
         {
-            this.DDA(vertice1, vertice2);
+            this.DDA1(vertice1, vertice2);
+        }
+
+        public void DDA1(Point p1, Point p2)
+        {
+            int dx, dy, passos;
+            double x, y;
+            
+            dx = p2.X - p1.X;
+            dy = p2.Y - p1.Y;
+            
+            if (Math.Abs(dx) > Math.Abs(dy))
+                passos = Math.Abs(dx);
+            else
+                passos = Math.Abs(dy);
+
+            x = p1.X;
+            y = p1.Y;
+            this.pontoCentral = p1;
+            this.notificar();//Notificar mudança de centro
+
+            double incrX = (double)dx / (double)passos;
+            double incrY = (double)dy / (double)passos;
+
+            for (int i = 0; i < passos; i++)
+            {
+                x += incrX;
+                y += incrY;
+                this.pontoCentral = new Point((int)Math.Round(x), (int)Math.Round(y));
+                this.notificar();//Notificar mudança de centro
+            }//end for
         }
 
         /*
@@ -122,8 +152,8 @@ namespace Trabalho_Final_CG.Estruturas
 	        }
         }
         */
-        
-        
+
+
 
         //Algoritmo de Bresenham DDA inteiro
         private void DDA(Point p1, Point p2)
@@ -163,8 +193,8 @@ namespace Trabalho_Final_CG.Estruturas
                             }
                             else
                             {
-                                x+=this.velocidade;
-                                y-=this.velocidade;
+                                x+= this.velocidade;
+                                y-= this.velocidade;
                                 this.pontoCentral = new Point(x, y);
                                 //Notifica as mudanças ao observador para transladar
                                 this.notificar();
