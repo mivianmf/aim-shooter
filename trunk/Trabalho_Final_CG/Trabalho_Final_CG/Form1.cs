@@ -61,10 +61,10 @@ namespace Trabalho_Final_CG
 
             //TODO: IMPORTANTE
             this.fases = new Fase[1];
-            Desenho quad = new Desenho(4);
-            Point[]vertices = {new Point(350,350),new Point(450,350), new Point(450,450), new Point(350,450)};
+            Desenho quad = new Desenho(3);
+            Point[]vertices = {new Point(350,350),new Point(700,350), new Point (350,100)};
             quad.setVertices(vertices);
-            this.fases[0] = new Fase(1, quad, 1);
+            this.fases[0] = new Fase(1, quad, 3);
             this.alvo = new Alvo(this.fases[0].getPontoCentral());
             this.fases[0].adicionarObservador(this.alvo);
             this.fases[0].adicionarObservador(this);
